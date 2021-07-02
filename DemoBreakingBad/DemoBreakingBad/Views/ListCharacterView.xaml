@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:DemoBreakingBad.Views" 
+             xmlns:local1="clr-namespace:DemoBreakingBad.ViewModels"
+             x:Class="DemoBreakingBad.Views.ListCharacterView"
+             Title="Breaking Bad Characters">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView   ItemsSource="{Binding Characters}"
+                        SelectedItem="{Binding SelectedCharacter}"
+                        HasUnevenRows="True"
+                        SeparatorVisibility="None"
+                        ItemTapped="ListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5" RowSpacing="10">
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image 
+                                Grid.RowSpan="2"
+                                WidthRequest="150"
+                                HeightRequest="100"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Source="{Binding Img}"/>
+                                <Label Text="{Binding Name}"
+                                       Grid.Column="1"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   FontSize="16"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="Start"
+                                   Text="{Binding Nickname}"/>
+                                <Image 
+                                    Grid.RowSpan="1"
+                                    WidthRequest="36"
+                                    HeightRequest="30"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="StartAndExpand"
+                                    Margin="5"
+                                    Source="{Binding Love}" Grid.Row="0" Grid.Column="2">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="LoveTapped"
+                                            CommandParameter="{Binding Char_id}"
+                                            NumberOfTapsRequired="1" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image 
+                                    Grid.RowSpan="1"
+                                    WidthRequest="36"
+                                    HeightRequest="30"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="StartAndExpand"
+                                    Margin="5"
+                                    Source="{Binding Unlove}" Grid.Row="0" Grid.Column="2">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="UnLoveTapped"
+                                            CommandParameter="{Binding Char_id}"
+                                            NumberOfTapsRequired="1" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
